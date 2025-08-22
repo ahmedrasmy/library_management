@@ -1,0 +1,80 @@
+<odoo>
+    <record id="library_book_view_tree" model="ir.ui.view">
+         <field name="name" > library book tree</field>
+        <field name="model" >library.book</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="name"/>
+                <field name="isbn" />
+                <field name="author_ids"/>
+                <field name="published_date"/>
+                <field name="cover_image" />
+                <field name="summary" />
+                <field name="is_available"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record id="library_book_view_form" model="ir.ui.view">
+         <field name="name" > library book form</field>
+        <field name="model" >library.book</field>
+        <field name="arch" type="xml">
+            <form >
+                <header>
+                <button type="object"
+                        name="action_view_active_rentals"
+                        class="oe_stat_button"
+                        icon="fa-book">
+                    <field name="active_rental_count" widget="statinfo"/>
+                </button>
+            </header>
+                <sheet>
+                    <div class="oe_title">
+                         <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                    </div>
+                    <group>
+                        <group>
+                                <field name="isbn"/>
+                                <field name="author_ids"  widget="many2many_tags"/>
+                                <field name="published_date" />
+                                <field name="cover_image" />
+                        </group>
+                        <group>
+                                <field name="summary"/>
+                                <field name="is_available"/>
+                        </group>
+                    </group>
+                    <notebook>
+                    <page string="Rentals">
+                        <field name="rental_ids">
+                            <tree>
+                                <field name="book_id"/>
+                                <field name="borrower_id"/>
+                                <field name="rental_date"/>
+                                <field name="return_date"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="library_book_action" model="ir.actions.act_window">
+        <field name="name">Book</field>
+        <field name="res_model">library.book</field>
+    </record>
+
+    <menuitem
+        id = 'library_book_menu_item'
+        name = 'Books'
+        parent = "library_menu"
+        action = "library_book_action"
+    />
+</odoo>

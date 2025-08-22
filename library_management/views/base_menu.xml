@@ -1,0 +1,12 @@
+<odoo>
+    <menuitem
+        id="library_management_root_menu"
+        name="Library Management"
+    />
+    <menuitem
+        id="library_menu"
+        name="Library"
+        parent = "library_management_root_menu"
+    />
+
+</odoo>
