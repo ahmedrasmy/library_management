@@ -3,18 +3,19 @@ from odoo import  api, fields, models
 
 class LibraryBook(models.Model):
     _name = 'library.book'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Library Book'
     _rec_name = 'name'
 
-    name = fields.Char('The title of the book',required=True)
-    isbn = fields.Char('ISBN')
-    author_ids = fields.Many2many('library.author')
-    published_date = fields.Date('Published Date')
-    cover_image = fields.Binary(string='Cover Image')
-    summary = fields.Text(string='Summary')
-    is_available = fields.Boolean(string='Is Available',compute='_compute_is_available')
-    rental_ids = fields.One2many('library.rental','book_id',string='Rentals')
-    active_rental_count = fields.Integer(string="Active Rentals",compute="_compute_active_rental_count")
+    name = fields.Char('The title of the book',required=True, tracking=True)
+    isbn = fields.Char('ISBN', tracking=True)
+    author_ids = fields.Many2many('library.author', tracking=True)
+    published_date = fields.Date('Published Date', tracking=True)
+    cover_image = fields.Binary(string='Cover Image', tracking=True)
+    summary = fields.Text(string='Summary', tracking=True)
+    is_available = fields.Boolean(string='Is Available',compute='_compute_is_available', tracking=True)
+    rental_ids = fields.One2many('library.rental','book_id',string='Rentals', tracking=True)
+    active_rental_count = fields.Integer(string="Active Rentals",compute="_compute_active_rental_count", tracking=True)
 
     @api.depends('rental_ids.state')
     def _compute_is_available(self):

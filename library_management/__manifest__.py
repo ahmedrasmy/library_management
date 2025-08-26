@@ -1,9 +1,9 @@
 {
     'name': 'Library Management',
     'author': 'Ahmed Rasmy',
-    'category': '',
-    'depends': ['base'],
-    'version': '1.0',
+    'category': 'Uncategorized',
+    'depends': ['base','mail'],
+    'version': '0.1',
     'data':[
         'security/security.xml',
         'security/ir.model.access.csv',

@@ -3,7 +3,7 @@
          <field name="name" > library book tree</field>
         <field name="model" >library.book</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1">
+            <list multi_edit="1">
                 <field name="name"/>
                 <field name="isbn" />
                 <field name="author_ids"/>
@@ -11,7 +11,7 @@
                 <field name="cover_image" />
                 <field name="summary" />
                 <field name="is_available"/>
-            </tree>
+            </list>
 
         </field>
     </record>
@@ -51,17 +51,18 @@
                     <notebook>
                     <page string="Rentals">
                         <field name="rental_ids">
-                            <tree>
+                            <list>
                                 <field name="book_id"/>
                                 <field name="borrower_id"/>
                                 <field name="rental_date"/>
                                 <field name="return_date"/>
                                 <field name="state"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -69,6 +70,12 @@
     <record id="library_book_action" model="ir.actions.act_window">
         <field name="name">Book</field>
         <field name="res_model">library.book</field>
+        <field name="target" >current</field>
+        <field name="help" type="html" >
+             <a class="o_view_nocontent_smiling_face" >
+                 create your first book
+             </a>
+         </field>
     </record>
 
     <menuitem

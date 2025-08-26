@@ -5,19 +5,20 @@ from odoo.exceptions import ValidationError
 
 class LibraryRental(models.Model):
     _name = 'library.rental'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Library Rental'
 
-    book_id = fields.Many2one('library.book', string='Book',required=True)
-    borrower_id = fields.Many2one('res.partner', string='Borrower',required=True)
-    rental_date = fields.Datetime(string='Rental Date',default=fields.Datetime.now())
-    return_date = fields.Datetime(string='Return Date')
+    book_id = fields.Many2one('library.book', string='Book',required=True, tracking=True)
+    borrower_id = fields.Many2one('res.partner', string='Borrower',required=True, tracking=True)
+    rental_date = fields.Datetime(string='Rental Date',default=fields.Datetime.now(), tracking=True)
+    return_date = fields.Datetime(string='Return Date', tracking=True)
     state = fields.Selection(
         [
             ('draft', 'Draft'),
             ('rented', 'Rented'),
             ('returned', 'Returned'),
             ('lost', 'Lost'),
-        ],default='draft',
+        ],default='draft', tracking=True
     )
 
 
