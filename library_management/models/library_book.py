@@ -37,7 +37,7 @@ class LibraryBook(models.Model):
             'name': 'Active Rentals',
             'type': 'ir.actions.act_window',
             'res_model': 'library.rental',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [
                 ('book_id', '=', self.id),
                 ('state', '=', 'rented')
